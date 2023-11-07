@@ -1,0 +1,232 @@
+db.mystudents.insertMany([
+{
+"id":2,"grades":[
+{"grade":90,"mean":75,"std":6},{"grade":87,"mean":90,"std":3},{"grade":85,"mean":85,"std":6}]
+},
+{
+"id":3,"grades":[
+{"grade":90,"mean":75,"std":6},{"grade":95,"mean":90,"std":4},{"grade":85,"mean":85,"std":7}]
+}
+
+
+
+])
+
+//for updating all occurrences (update all grades for all documents for which std is 6
+
+ db.mystudents.update({},{$inc:{'grades.$[elem].grade':2}},{arrayFilters:[{'elem.std':{$eq:6}}]},{multi:true})
+
+
+
+ASSIGNMENT(Update)
+
+Create a Employee Collection add 5 documents:
+Example:
+{empno:111,ename:”Deepali
+Vaidya”,sal:40000.00,dept:{deptno12,dname:,”Hr”,dloc:”Mumbai},
+Desg:”Analyst”,mgr:{name:”Satish”,num:111},project:[{name:”Project1”,Hrs:4},{name:”project- 2”,Hrs:4}]}
+
+db.employee.insert(
+{"empno":111,"ename":"Deepali Vaidya","sal":40000.00,"dept":{"deptno":12,"dname":"Hr","dloc":"Mumbai"},
+"Desg":"Analyst","mgr":{"name":"Satish","num":111},"project":[{"name":"Project1","Hrs":4},{"name":"project- 2","Hrs":4}]})
+
+db.employee.insertMany([
+{"empno":112,"ename":"Deepanshi Vaidya","sal":30000.00,"dept":{"deptno":11,"dname":"sales","dloc":"Mumbai"},
+"Desg":"clerk","mgr":{"name":"Satyam","num":112},"project":[{"name":"Project1","Hrs":8},{"name":"project- 2","Hrs":7}]},
+
+{"empno":113,"ename":"Deepak Vashishth","sal":45000.00,"dept":{"deptno":12,"dname":"Hr","dloc":"Pune"},
+"Desg":"Analyst","mgr":{"name":"Suresh","num":113},"project":[{"name":"Project1","Hrs":5},{"name":"project- 2","Hrs":4}]},
+
+{"empno":114,"ename":"archana gupta","sal":40000.00,"dept":{"deptno":12,"dname":"marketing","dloc":"Baner"},
+"Desg":"hr","mgr":{"name":"ramesh","num":114},"project":[{"name":"Project1","Hrs":2},{"name":"project- 2","Hrs":6}]},
+
+{"empno":115,"ename":"akshita trivedi","sal":49000.00,"dept":{"deptno":16,"dname":"finance","dloc":"kuthrod"},
+"Desg":"Analyst","mgr":{"name":"abhishek mishra","num":116},"project":[{"name":"Project1","Hrs":6},{"name":"project- 2","Hrs":3}]},
+
+db.employee.insert(
+{"empno":313,"ename":"Dipshikha","sal":407800.00,"dept":{"deptno":12,"dname":"Purchase","dloc":"Mumbai"},
+"Desg":"Analyst","mgr":{"name":"Satish","num":111},"project":[{"name":"Project1","Hrs":4},{"name":"project- 2","Hrs":4}]})
+
+db.employee.insert(
+{"empno":314,"ename":"daya","sal":67800.00,"dept":{"deptno":15,"dname":"Purchase","dloc":"pune"},
+"Desg":"Analyst","mgr":{"name":"Satish","num":111},"project":[{"name":"Project1","Hrs":4},{"name":"project- 2","Hrs":4}]})
+
+])
+
+db.employee.insert(
+{"empno":117,"ename":"Divya Vaidya","sal":75000.00,"dept":{"deptno":15,"dname":"Hr","dloc":"Mumbai"},
+"Desg":"Analyst","mgr":{"name":"Satish","num":111},"project":[{"name":"Project1","Hrs":3},{"name":"project- 2","Hrs":4}]})
+db.employee.insert(
+{"empno":189,"ename":"Diksha","sal":30000.00,"dept":{"deptno":15,"dname":"Hr","dloc":"Mumbai"},
+"Desg":"Analyst","mgr":{"name":"Satish","num":111},"project":[{"name":"Project1","Hrs":3},{"name":"project- 2","Hrs":4}]})
+db.employee.insert(
+{"empno":231,"ename":"Bhau","sal":20000.00,"dept":{"deptno":15,"dname":"Hr","dloc":"Mumbai"},
+"Desg":"Analyst","mgr":{"name":"Satish","num":111},"project":[{"name":"Project1","Hrs":3},{"name":"project- 2","Hrs":4}]})
+
+db.employee.insert(
+{"empno":931,"ename":"jhetha lal","sal":14000.00,"bonus":1000,"dept":{"deptno":15,"dname":"Hr","dloc":"Mumbai"},
+"Desg":"Analyst","mgr":{"name":"Satish","num":111},"project":[{"name":"Project1","Hrs":3},{"name":"project- 2","Hrs":4}]})
+
+db.employee.insert(
+{"empno":991,"ename":"tappu","sal":13000.00,"bonus":9000,"dept":{"deptno":15,"dname":"Hr","dloc":"Mumbai"},
+"Desg":"Analyst","mgr":{"name":"Satish","num":111},"project":[{"name":"Project1","Hrs":3},{"name":"project- 2","Hrs":4}]})
+
+db.employee.insert(
+{"empno":981,"ename":"daya","sal":13000.00,"bonus":9000,"dept":{"deptno":15,"dname":"Hr","dloc":"Mumbai"},
+"Desg":"Analyst","mgr":{"name":"Satish","num":111},"project":[{"name":"Project1","Hrs":3},{"name":"project- 2","Hrs":4}]})
+
+db.employee.insert(
+{"empno":881,"ename":"anjali","sal":13000.00,"bonus":9000,"dept":{"deptno":15,"dname":"Hr","dloc":"Mumbai"},
+"Desg":"Analyst","mgr":{"name":"Satish","num":111},"project":[{"name":"Project1","Hrs":3},{"name":"project- 2","Hrs":4}]})
+
+
+db.employee.insert(
+{"empno":777,"ename":"pushpa","sal":13000.00,"bonus":9000,"dept":{"deptno":15,"dname":"Hr","dloc":"Mumbai"},
+"Desg":"Analyst","mgr":{"name":"Satish","num":111},"project":[{"name":"Project1","Hrs":4},{"name":"project- 2","Hrs":4}]})
+
+
+db.employee.insert(
+{"empno":777,"ename":"abc","sal":13000.00,"bonus":9000,"dept":{"deptno":15,"dname":"Hr","dloc":"Mumbai"},
+"Desg":"Analyst","mgr":{"name":"Satish","num":111},"project":[{"name":"project3","Hrs":4},{"name":"project4","Hrs":3}]})
+
+1. All Employee’s with the desg as ‘CLERK’ are now called as (AO) Administrative Officers.
+
+db.employee.update({Desg:'clerk'},{$set:{Desg:'Administrative Officers'}},{multi:true})
+
+Update the Employee collection for this.
+2. Change the number of hours for project-1 to 5 for all employees with designation analyst.
+db.employee.insert(
+{"empno":117,"ename":"Deepshika Vaidya","sal":40000.00,"dept":{"deptno":15,"dname":"Hr","dloc":"Mumbai"},
+"Desg":"Analyst","mgr":{"name":"Satish","num":111},"project":[{"name":"Project1","Hrs":3},{"name":"project- 2","Hrs":4}]})
+
+db.employee.insert(
+{"empno":121,"ename":"aditya ","sal":47000.00,"dept":{"deptno":25,"dname":"sales","dloc":"Mumbai"},
+"Desg":"Analyst","mgr":{"name":"Satish","num":116},"project":[{"name":"Project1","Hrs":7},{"name":"project- 2","Hrs":4}]})
+
+db.employee.updateMany({Desg:'Analyst'},{$set:{'project.$[elem].Hrs':5}},{arrayFilters:[{'elem.name':'Project1'}]},{multi:true})
+
+3. Add 2 projects project-3 and project-4 for employee whose name starts with ”Deep” with 2 hrs
+db.employee.update({ename:/^[Deep]/},{$push:{project:{$each:[{"name":"Project3","Hrs":2},{"name":"Project4","Hrs":2}]}}},{multi:true})
+
+
+4. Add bonus rs 2000 for all employees with salary > 50000
+db.employee.update({sal:{$gt:50000}},{$inc:{sal:2000}},{multi:true})
+
+
+5. Add bonus rs 1500 if salary <50000 and > 30000
+db.employee.update({sal:{$lt:50000,$gt:3000}},{$inc:{sal:1500}},{multi:true})
+
+
+6. increment bounus by 1000 for all employees if salary <=30000
+db.employee.update({sal:{$lte:30000}},{$inc:{sal:1000}},{multi:true})
+
+7. Change manager name to Tushar for all employees whose manager is currently “satish”
+And manager number to 3333
+db.employee.updateMany({'mgr.name':'Satish'},{$set:{'mgr.name':'Tushar'}} ,{$set:{'mgr.num':3333}},{multi:true})
+
+8. Increase salary of all employees from “purchase department” by 15000
+db.employee.updateMany({'dept.dname':'Purchase'},{$inc:{sal:15000}},{multi:true})
+
+
+9. Decrease number of hrs by 2 for all employees who are working on project-2
+db.employee.updateMany({'project.name':'project- 2'},{$inc:{'project.$.Hrs':-2}},{multi:true})
+
+10. Delete project-2 from all employee document if they are working on the project for 4//////////////
+hrs.
+db.employee.updateMany({'project.Hrs':4},{$pop:{project:1}},{multi:true})
+
+11. Change the salary of employees to 10000 only if their salary is < 10000
+db.employee.updateMany({sal:{$lt:50000}},{$set:{sal:11000}})
+
+
+12. Increase bonus of all employees by 500 if the bonus is <2000 or their salary is <
+20000 or if employee belong to sales(Hr) department
+db.employee.updateMany({'dept.dname':'Hr',bonus:{$lt:2000},sal:{$lt:20000}},{$inc:{sal:500}},{multi:true})
+
+db.employee.find({},{sal:1,_id:0})
+
+13. Add 2 new project at position 2 for all employees with designation analyst or salary is
+equal to either 30000 or 33000 or 35000
+db.employee.updateMany({$or:[{'desg':'Analyst'},{sal:{$in:[11000,33000,35000]}}]},
+{$push:{project:{$each:[{"name":"Project6","Hrs":2},{"name":"Project7","Hrs":2}],$position:2}}})
+
+
+14. Delete last project of all employees with department name is “HR” and if the location
+is Mumbai
+db.employee.update({'dept.dname':'Hr','dept.dloc':'Mumbai'},{$pop:{project:1}})
+
+
+15. Change designation of all employees to senior programmer if they are working on
+name:”Project-1” for 4 hrs
+db.employee.updateMany({'project.name':'Project1','project.Hrs':4},{$set:{Desg:'senior programmer'}},{multi:true})
+
+16. Add list of hobbies in all employees document whose manager is Rajan or Revati(Ramesh)
+db.employee.updateMany({'mgr.name':'ramesh'},{$set:{hobbies:['drawing','dancing','singing']}},{upsert:true})
+
+17. Add list of skillset in all employee documents who are working on project-4 for 3 hrs
+or on project-3 for 4 hrs
+db.employee.updateMany({$or:[{'project.name':'project4','project.Hrs':3},{'project.name':'project3','project.Hrs':4}]},{$set:{skills:['excel','coding','team management']}},{upsert:true})
+
+18. Add a new hobby as blogging at 3 position in hobbies array for all employess whose
+name starts with R or p and ends with j or s
+db.employee.update({ename:/^[RrpP].*[jsJS]/},{$push:{hobbies:{$each:['blogging'],$position:3}}})
+
+19. Increase salary by 10000 for all employees who are working on project-2 or project-3
+or project-1
+Decrease bonus by 1000 rs And increase salary by 1000rs for all employees whose
+department location is Mumbai
+db.employee.updateMany({'project.name':{$in:['Project1','project- 2','project3']},'dept.dloc':'Mumbai'},{$inc:{sal:10000}},{$inc:{bonus:-1000}})
+
+
+20. Remove all employees working on project-1
+db.employee.deleteMany({'project.name':'Project1'})
+
+21. Replace document of employee with name “Deepak(Deepali Vaidya) to some new document
+db.employee.updateMany({ename:'Deepali Vaidya'},{$set:{ename:'Shyam'}},{$upsert:true})
+
+
+22. Change skill python to python 3.8 for all employees if python is there in the skillset //updated excel to advanced excel
+db.employee.updateMany({skills:'excel'},{$set:{skills:'Advanced excel'}},{upsert:true})
+db.employee.updateMany({skills:'Advanced excel'},{$set:{skills:['Advanced excel','coding','team management']}})
+
+23. Add 2 skills MongoDb and Perl at the end of skillset array for all employees who are
+working at Pune location //updated for mumbai location
+db.employee.updateMany({'dept.dloc':'Pune'},{$push:{skills:['MongoDb','Perl']}})
+
+24. Delete first hobby from hobby array for all employees who are working on project-1
+or project-2
+db.employee.updateMany({'project.name':{$in:['Project1','project- 2']}},{$pop:{hobbies})///
+
+25. Delete last hobby from hobbies array for all employees who are working on project
+which is at 2 nd position in projects array for 4 hrs
+
+
+26. Add 2 new projects at the end of array for all employees whose skillset contains Perl
+or python
+db.employee.updateMany({skills:{$in:['Perl','Python']}},{$push:{project:{$each:[{"name":"Project7","Hrs":2},{"name":"Project8","Hrs":2}]}}})
+
+27. Change hrs to 6 for project-1 for all employees if they working on the project-1 for <
+6 hrs. otherwise keep the existing value.
+
+
+db.movie.aggregate([
+{$project:{
+name:1,price:1,ticket_no:1,rating:1,sump:{$add:[{$ifNull:['$price',0]},{$ifNull:['ticket_no',0]}]}}}
+])
+
+
+db.movie.aggregate([
+{$match:{price:{$nin:[null],$exists:true},ticket_no:{$nin:[null],$exists:true}}},
+{$project:{name:{$toUpper:'$name'},price:1,ticket_no:1,differ:{$subtract:['$price','$ticket_no']}}}
+])
+
+db.movie.aggregate([
+{$match:{rating:1}},
+{$project:{name:{$toUpper:'$name'},price:1,dis_price:{$multiply:['$price',0.90]}}}
+])
+
+
+db.student.aggregate([
+{$project:{name:1,grades:1,email:{$concat:['$name','.',{$substr:['$name',0,3]},"mycompany.com"]}}
+}
+])
