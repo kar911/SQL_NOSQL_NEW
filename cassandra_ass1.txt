@@ -1,0 +1,35 @@
+
+1. create a product table:
+
+create table product (
+    pid int primary key,
+    pname text,
+    qty int,
+    price decimal,
+    features text
+);
+
+2. insert 5 records into the product table:
+
+insert into product (pid, pname, qty, price, features) values (1, 'product1', 10, 100.0, 'feature1');
+insert into product (pid, pname, qty, price, features) values (2, 'product2', 20, 200.0, 'feature2');
+insert into product (pid, pname, qty, price, features) values (3, 'product3', 30, 300.0, 'feature3');
+insert into product (pid, pname, qty, price, features) values (4, 'product4', 40, 400.0, 'feature4');
+insert into product (pid, pname, qty, price, features) values (5, 'product5', 50, 500.0, 'feature5');
+
+3. create a books table:
+
+create table books (
+    bid int primary key,
+    bname text,
+    authors text,
+    price decimal
+);
+
+4. insert 5 records into the books table:
+
+insert into books (bid, bname, authors, price) values (1, 'book1', 'author1', 100.0);
+insert into books (bid, bname, authors, price) values (2, 'book2', 'author2', 200.0);
+insert into books (bid, bname, authors, price) values (3, 'book3', 'author3', 300.0);
+insert into books (bid, bname, authors, price) values (4, 'book4', 'author4', 400.0);
+insert into books (bid, bname, authors, price) values (5, 'book5', 'author5', 500.0);

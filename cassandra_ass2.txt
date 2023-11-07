@@ -1,0 +1,90 @@
+create table customers (
+    customer_id uuid primary key,
+    name text,
+    mobile set<int>,
+    email tuple<text, text>,
+    purchaseveh map<text, int>,
+    hobbies list<text>
+);
+
+
+
+create table customer (
+    customer_id int primary key,
+    name text,
+    mobile set<int>,
+    email tuple<text, text>,
+    purchaseveh map<text, int>,
+    hobbies list<text>
+);
+
+
+
+insert into customer (customer_id, name, mobile, email, purchaseveh, hobbies) values (11, 'name11', {1234567890}, ('email11@example.com', 'alternate11@example.com'), {'car': 1}, ['hobby1']);
+insert into customer (customer_id, name, mobile, email, purchaseveh, hobbies) values (12, 'name12', {1234567891}, ('email12@example.com', 'alternate12@example.com'), {'bike': 1}, ['hobby2']);
+insert into customer (customer_id, name, mobile, email, purchaseveh, hobbies) values (13, 'name13', {1234567892}, ('email13@example.com', 'alternate13@example.com'), {'scooter': 1}, ['hobby3']);
+insert into customer (customer_id, name, mobile, email, purchaseveh, hobbies) values (14, 'name14', {1234567893}, ('email14@example.com', 'alternate14@example.com'), {'truck': 1}, ['hobby4']);
+insert into customer (customer_id, name, mobile, email, purchaseveh, hobbies) values (15, 'name15', {1234567894}, ('email15@example.com', 'alternate15@example.com'), {'bus': 1}, ['hobby5']);
+
+
+
+update customer set hobbies = hobbies + ['design', 'drawing'] where customer_id = 12;
+
+
+
+update customer set hobbies = hobbies - ['design'] where customer_id = 12;
+
+
+
+update customer set name = 'newname' where customer_id = 11;
+
+
+
+update customer set email = ('newemail13@example.com', 'newalternate13@example.com') where customer_id = 13;
+
+
+
+update customer set purchaseveh = purchaseveh + {'newvehicle': 1} where customer_id = 11; 
+update customer set purchaseveh = purchaseveh - {'car'} where customer_id = 11; 
+
+
+
+update customer set hobbies = hobbies + ['newhobby'] where customer_id = 14; 
+update customer set hobbies = hobbies - ['hobby4'] where customer_id = 14; 
+
+
+
+update customer set purchaseveh['activa'] = new_quantity where customer_id = 15; 
+
+
+
+begin batch
+insert into customer (customer_id, name) values (16, 'name16');
+insert into customer (customer_id, name) values (17, 'name17');
+delete from customer where customer_id = 13;
+update customer set email = null where customer_id = 11;
+update customer set email = ('newemail12@example.com', 'newalternate12@example.com') where customer_id = 12;
+apply batch;
+
+
+
+
+create type department (
+    deptno int,
+    dname text
+);
+
+alter type department add dloc text;
+
+create table emp (
+    eid int primary key,
+    ename text,
+    sal decimal,
+    projects list<text>,
+    dept frozen<department>
+);
+
+
+
+
+create index on emp(ename);

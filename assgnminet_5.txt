@@ -1,0 +1,268 @@
+create table branch(
+bid int,
+brname char(30),
+brcity char(10)
+);
+
+create table customer(
+cno int,
+cname char(20),
+caddr char(35),
+city char(20)
+);
+
+create table loan_application(
+lno int,
+lamtrequired_money double,
+lamtapproved_money double,
+l_date date
+);
+
+create table ternary(
+bid int,
+cno int,
+lno int
+);
+
+-- Inserting data into BRANCH table
+INSERT INTO BRANCH  VALUES (1, 'Branch1', 'Aundh');
+INSERT INTO BRANCH  VALUES (2, 'Branch2', 'Deccan');
+INSERT INTO BRANCH VALUES (3, 'Branch3', 'M.G.ROAD');
+
+-- Inserting data into CUSTOMER table
+INSERT INTO CUSTOMER  VALUES (1, 'XXX', 'Address1', 'City1');
+INSERT INTO CUSTOMER  VALUES (2, 'YYY', 'Address2', 'City2');
+INSERT INTO CUSTOMER  VALUES (3, 'ZZZ', 'Address3', 'City3');
+
+-- Inserting data into LOAN_APPLICATION table
+INSERT INTO LOAN_APPLICATION  VALUES (1, 5000.00, 4000.00, '2023-01-01');
+INSERT INTO LOAN_APPLICATION  VALUES (2, 6000.00, 5500.00, '2023-09-01');
+INSERT INTO LOAN_APPLICATION  VALUES (3, 7000.00, 7000.00, '2023-09-11');
+
+-- Inserting data into TERNARY table
+INSERT INTO TERNARY (BID, CNO, LNO) VALUES (1, 1, 1);
+INSERT INTO TERNARY (BID, CNO, LNO) VALUES (2, 2, 2);
+INSERT INTO TERNARY (BID, CNO, LNO) VALUES (3, 3, 3);
+
+
+-- 1
+select cname from customer c join ternary t on c.cno = t.cno  join branch b on b.bid = t.bid where t.bid = b.bid and  c.cno = t.cno and b.brname = "aundh";
+
+SELECT CNAME 
+FROM CUSTOMER 
+WHERE CNO IN (
+    SELECT CNO 
+    FROM TERNARY 
+    WHERE BID IN (
+        SELECT BID 
+        FROM BRANCH 
+        WHERE BRCITY = 'Aundh'
+    )
+);
+
+
+SELECT CNAME 
+FROM CUSTOMER 
+WHERE CNO IN (
+    SELECT CNO 
+    FROM TERNARY 
+    WHERE LNO IN (
+        SELECT LNO 
+        FROM  LOAN_APPLICATION 
+        WHERE lamtrequired_money > lamtapproved_money
+    )
+);
+
+
+SELECT LNO 
+FROM  LOAN_APPLICATION 
+WHERE lamtrequired_money < lamtapproved_money;
+
+1)
+mysql> create procedure delete_emp(empn int)
+    -> begin
+    -> delete from emp
+    -> where empno=empn;
+    -> select empn,'deleted';
+    -> end//
+mysql> call delete_emp(1234)//
++------+---------+
+| empn | deleted |
++------+---------+
+| 1234 | deleted |
++------+---------+
+1 row in set (0.04 sec)
+
+2)
+a)
+mysql> create function calcexp(hdate date) returns int
+    -> begin
+    -> return floor(datediff(curdate(),hdate)/365);
+    -> end//
+Query OK, 0 rows affected (0.06 sec)
+
+mysql> select empno, ename, hiredate, calcexp(hiredate) from emp//
++-------+--------+------------+-------------------+
+| empno | ename  | hiredate   | calcexp(hiredate) |
++-------+--------+------------+-------------------+
+|  7369 | SMITH  | 1980-12-17 |                42 |
+|  7499 | ALLEN  | 1981-02-20 |                42 |
+|  7521 | WARD   | 1981-02-22 |                42 |
+|  7566 | JONES  | 1981-04-02 |                42 |
+|  7654 | MARTIN | 1981-09-28 |                42 |
+|  7698 | BLAKE  | 1981-05-01 |                42 |
+|  7782 | CLARK  | 1981-06-09 |                42 |
+|  7788 | SCOTT  | 1982-12-09 |                40 |
+|  7839 | KING   | 1981-11-17 |                41 |
+|  7844 | TURNER | 1981-09-08 |                42 |
+|  7876 | ADAMS  | 1983-01-12 |                40 |
+|  7900 | JAMES  | 1981-12-03 |                41 |
+|  7902 | FORD   | 1981-12-03 |                41 |
+|  7934 | MILLER | 1982-01-23 |                41 |
++-------+--------+------------+-------------------+
+14 rows in set (0.00 sec)
+
+b)
+
+mysql> create function calcnsal(salary decimal, commi decimal) returns decimal
+    -> begin
+    -> return salary+1.1*salary+1.15*salary+1.08*salary+ifnull(commi,0);
+    -> end//
+mysql> select sal, comm, calcnsal(sal,comm) from emp//
++---------+---------+--------------------+
+| sal     | comm    | calcnsal(sal,comm) |
++---------+---------+--------------------+
+| 1300.00 |    NULL |               5629 |
+| 1840.00 |  300.00 |               8267 |
+| 1437.50 |  500.00 |               6727 |
+| 2975.00 |    NULL |              12882 |
+| 1437.50 | 1400.00 |               7627 |
+| 2850.00 |    NULL |              12341 |
+| 4275.00 |    NULL |              18511 |
+| 3000.00 |    NULL |              12990 |
+| 4275.00 |    NULL |              18511 |
+| 1725.00 |    0.00 |               7469 |
+| 1100.00 |    NULL |               4763 |
+|  950.00 |    NULL |               4114 |
+| 3000.00 |    NULL |              12990 |
+| 4275.00 |    NULL |              18511 |
++---------+---------+--------------------+
+14 rows in set, 12 warnings (0.00 sec)
+
+Loops example
+1)
+a)
+create procedure trpt(num int)
+begin
+declare str1 varchar(50) default '';
+declare n int default 1;
+
+while n<=num do
+set str1=concat(str1,'\n',lpad('',n,'*'));
+set n=n+1;
+end while;
+select str1;
+end//
+
+b)
+create procedure trpt(num int)
+begin
+declare str1 varchar(50) default '';
+declare str2 varchar(50) default '';
+declare n int default 1;
+while n<=num do
+set str1=concat(str1,'\n',rpad(' ',n,'*'));
+set n=n+1;
+end while;
+set str2 ='';
+set n = num-1;
+while n>=1 do
+set str2 = concat(str2,'\n',rpad(' ',n,'*'));
+set n=n-1;
+end while;
+set n = 0;
+
+select concat(str1,str2);
+end//
+
+
+create procedure diamond(num int)
+begin
+declare str varchar(50) default'';
+declare n int default 1;
+declare space int default 0;
+set space = floor(num/2);
+while n<=num do
+set str=concat(str,'\n',lpad('',space,' '),lpad('',n,'*'));
+set n=n+2;
+set space=space-1;
+end while;
+set space=1;
+set n=num-2;
+while n>=1 do
+set str=concat(str,'\n',lpad('',space,' '),lpad('',n,'*'));
+set n=n-2;
+set space=space+1;
+end while;
+select str;
+end//
+
+c)
+create procedure oz1(num int)
+begin
+declare str2 varchar(50) default '';
+declare n int default 1;
+declare space int default 0;
+declare i int default 0;
+set n = num-1;
+set space=1;
+while n>=1 do
+if i = 0 then
+set i=1;
+else
+set i=0;
+end if;
+set str2=concat(str2,'\n',lpad('',space,' '),lpad('',n,i));
+set n=n-1;
+end while;
+set n = 0;
+
+select str2;
+end//
+
+3) trigger
+create trigger check_emp
+before update on emp for each row
+begin
+insert into emp_check values(
+old.empno,
+new.ename,
+old.sal,
+new.sal,
+user(),
+now());
+end//
+
+create trigger check_emp1
+before insert on emp for each row
+begin
+insert into emp_check values(
+new.empno,
+new.ename,
+null,
+new.sal,
+user(),
+now());
+end//
+
+create trigger check_emp2
+before delete on emp for each row
+begin
+insert into emp_check values(
+old.empno,
+old.ename,
+old.sal,
+null,
+user(),
+now());
+end//
