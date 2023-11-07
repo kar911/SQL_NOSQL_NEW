@@ -1,0 +1,50 @@
+db.Employee.aggregate({$sort:{sal:1}})
+
+db.Employee.aggregate({$group:{_id:'$Desg',totalsal:{$sum:'$sal'}}})
+
+db.Employee.aggregate({$group:{_id:'$Desg',totalsal:{$sum:'$sal'}}},{$sort:{totalsal:1}})
+
+db.movie.aggregate([{$group:{_id:'$rating',sump:{$sum:'$price'}
+,avgp:{$avg:'$price'}}},{$sort:{_id:-1}},{$skip:2},{$limit:3}]);
+
+db.movie.aggregate([{$group:{_id:'$rating',sump:{$sum:'$price'}
+,avgp:{$avg:'$price'},cuont:{$sum:1}}},{$sort:{_id:-1}}]);
+
+db.movie.aggregate([{$group:{_id:'$rating',sump:{$sum:'$price'}
+,avgp:{$avg:'$price'},cuont:{$sum:1}}},{$sort:{cuont:1}}]);
+
+db.movie.aggregate([{$project:{name:1,ticket:1,sump:{$add:['$price','$ticket_no']}}}]);
+
+
+db.movie.aggregate([{$project:{name:1,ticket:1,sump:{$add:['$price','$ticket_no']}}}]);
+
+
+db.movie.aggregate([{$project:{name:1,ticket:1,sump:{$add:['$price',{$ifnull:['$ticket_no',0]}]}}}]);
+
+db.movie.aggregate([{$project:{name:1,ticket:1,
+sump:{$add:[{$ifNull:['$price',0]},{$ifNull:['$ticket_no',0]}]}}}]);
+
+db.movie.aggregate([{$match:{price:{$ne:null,$exists:true}},ticket_no:{$ne:null,$exists:true}},{$project:{name:{$toUpper:'$name'},price:1,ticket_no:1,differ:{$subtract:['$price','$ticket_no']}}}])
+
+db.movie.aggregate([{$match:{price:{$nin:[null],$exists:true}},ticket_no:{$nin:[null],$exists:true}},{$project:{name:{$toUpper:'$name'},price:1,ticket_no:1,differ:{$subtract:['$price','$ticket_no']}}}])
+
+db.student.aggregate([{$project:{name:1,grades:1,email:{$concat:['$name','.',{$substr:['$name',0,3]},'@comp.in']}}}])
+
+db.Employee.aggregate([{$project:{name:1,hiredate:1,yearj:{$year:'$hiredate'}}},{$project:{name:1,hiredate:1,yearj:1,exp:{$subtract:[{$year:new Date()},'$yearj']}}}])
+
+db.movie.aggregate([{$sort:{price:-1}},{$limit:3},{$sort:{name:1}}])
+
+db.movie.aggregate([{$project:{name:1,lastModified:1,yearj:{$year:'$lastModified'}}},{$project:{name:1,lastModified:1,yearj:1,exp:{$subtract:[{$year:new Date()},'$yearj']}}}])
+
+db.samplerest.aggregate([{$limit:2},{$unwind:'$grades'}])
+
+db.samplerest.aggregate([{$limit:2},{$unwind:'$grades'},{$match:{'grades.score':2}}])
+
+db.samplerest.aggregate([{$limit:2},{$unwind:'$grades'},{$project:{count:{$sum:1}}},{$match:{'grades.score':9}}])
+
+db.samplerest.aggregate([
+    {$limit:2},
+    {$unwind:'$grades'},
+    {$match:{'grades.score':9}},
+    {$count: "total"}
+])
